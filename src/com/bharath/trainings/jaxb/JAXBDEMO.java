@@ -1,10 +1,12 @@
 package com.bharath.trainings.jaxb;
 
+import java.io.StringReader;
 import java.io.StringWriter;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 
 import com.bharatthippireddy.patient.Patient;
 
@@ -25,6 +27,13 @@ public class JAXBDEMO {
 			marshaller.marshal(patient, writer);
 			
 			System.out.println(writer.toString());
+			
+			
+			Unmarshaller unMarshaller = context.createUnmarshaller();
+			Patient patientResult = (Patient) unMarshaller
+					.unmarshal(new StringReader(writer.toString()));
+			
+			System.out.println(patientResult.getName());
 			
 		} catch (JAXBException e) {
 			// TODO Auto-generated catch block
